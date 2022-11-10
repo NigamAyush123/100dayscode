@@ -1,0 +1,25 @@
+TOPIC: JAVA SUSTRING
+Question: In first line user give a string and in second line user give Starting and ending index from where to where he/she will break the String and output is only those word of that string which user needs. This problem is taken in HackerRank.
+Logic: User give a string that is stored in a String variable and user also give from where to where he break the string so this is int type and store a two different variable for starting index and last index. and print with the help of substring(starting index,last index).
+Sample Input
+Helloworld
+3 7
+Sample Output
+lowo
+SOLUTION
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String S = in.next();
+        int start = in.nextInt();
+        int end = in.nextInt();
+        System.out.println(S.substring(start, end));
+    }
+}
