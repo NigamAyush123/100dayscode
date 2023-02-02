@@ -1,0 +1,81 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+class Result {
+
+    /*
+     * Complete the 'appendAndDelete' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts following parameters:
+     *  1. STRING s
+     *  2. STRING t
+     *  3. INTEGER k
+     */
+
+    public static String appendAndDelete(String s, String t, int k) {
+    // Write your code here
+     if(s.equals(t)) return "Yes";    
+        int sn = s.length();
+        int tn = t.length();
+        int same = -1;
+        int mn = Math.min(sn,tn);
+        //get index where s and t deviate
+        for(int i = 0; i < mn; i++){
+            if(s.charAt(i) == t.charAt(i)) same = i; 
+            else break;
+        }
+        int deviationIndex = same + 1;
+        if(deviationIndex == 0){
+            //can we delete all of s and append with t
+            return k >= sn + tn ? "Yes" : "No";
+        }
+        else{
+            
+            //s length is <= length of t
+            if(sn <= tn) {
+                int c = 0;
+                /* if chars at begin of s are equal to those at 
+                dev point of t then maybe we can append so that s == t*/
+                while(deviationIndex+c < tn){
+                    if(s.charAt(c) != t.charAt(deviationIndex + c)) return "No";
+                    c++;
+                }
+                return "Yes";
+            }
+            /* size of s - index of deviation
+            if k > deviation yes we can */
+            if(k >= sn - deviationIndex) return "Yes"; 
+        }  
+        return "No";
+    }
+
+    }
+
+
+
+public class Solution {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = bufferedReader.readLine();
+
+        String t = bufferedReader.readLine();
+
+        int k = Integer.parseInt(bufferedReader.readLine().trim());
+
+        String result = Result.appendAndDelete(s, t, k);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedReader.close();
+        bufferedWriter.close();
+    }
+}
